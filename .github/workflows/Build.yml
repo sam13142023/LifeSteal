@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LifeSteal-Plugin
-          path: target/lifesteal-*.jar
+          path: target/LifeSteal-*.jar
           if-no-files-found: error
 
       - name: Create Release
