@@ -21,95 +21,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Create Maven structure if it doesn't exist
-        run: |
-          if [ ! -f "pom.xml" ]; then
-            mkdir -p src/main/java/com/example/lifesteal/{enchantments,listeners,commands}
-            echo "Creating Maven project structure..."
-            
-            # Create pom.xml
-            cat << EOF > pom.xml
-            <?xml version="1.0" encoding="UTF-8"?>
-            <project xmlns="http://maven.apache.org/POM/4.0.0"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-                <modelVersion>4.0.0</modelVersion>
-
-                <groupId>com.example</groupId>
-                <artifactId>lifesteal</artifactId>
-                <version>1.0.0</version>
-                <packaging>jar</packaging>
-
-                <name>LifeSteal</name>
-                <description>A Paper plugin that adds Life Steal enchantment</description>
-
-                <properties>
-                    <java.version>17</java.version>
-                    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-                </properties>
-
-                <repositories>
-                    <repository>
-                        <id>papermc</id>
-                        <url>https://repo.papermc.io/repository/maven-public/</url>
-                    </repository>
-                </repositories>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>io.papermc.paper</groupId>
-                        <artifactId>paper-api</artifactId>
-                        <version>1.19.4-R0.1-SNAPSHOT</version>
-                        <scope>provided</scope>
-                    </dependency>
-                </dependencies>
-
-                <build>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-compiler-plugin</artifactId>
-                            <version>3.11.0</version>
-                            <configuration>
-                                <source>\${java.version}</source>
-                                <target>\${java.version}</target>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-shade-plugin</artifactId>
-                            <version>3.4.1</version>
-                            <executions>
-                                <execution>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>shade</goal>
-                                    </goals>
-                                    <configuration>
-                                        <createDependencyReducedPom>false</createDependencyReducedPom>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-                    </plugins>
-                    <resources>
-                        <resource>
-                            <directory>\${project.basedir}</directory>
-                            <includes>
-                                <include>plugin.yml</include>
-                            </includes>
-                        </resource>
-                    </resources>
-                </build>
-            </project>
-            EOF
-          fi
-
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
       - name: Upload Plugin JAR
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: LifeSteal-Plugin
           path: target/lifesteal-*.jar
