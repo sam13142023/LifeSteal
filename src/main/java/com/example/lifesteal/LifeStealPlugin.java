@@ -24,7 +24,8 @@ public class LifeStealPlugin extends JavaPlugin {
         
         // 注册事件监听器
         getServer().getPluginManager().registerEvents(new LifeStealListener(), this);
-        
+        // 注册命令
+        this.getCommand("lifesteal").setExecutor(new LifeStealCommand());
         getLogger().info("LifeSteal 插件已启用！");
     }
     
