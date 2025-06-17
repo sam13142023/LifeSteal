@@ -1,0 +1,16 @@
+name: LifeSteal
+version: 1.0.0
+main: com.example.lifesteal.LifeStealPlugin
+api-version: '1.21'
+description: Adds Life Steal enchantment to the game
+author: sam13142023
+commands:
+  lifesteal:
+    description: 获得生命汲取附魔
+    usage: /lifesteal [等级] [book]
+    permission: lifesteal.give
+    permission-message: 你没有权限使用此命令！
+permissions:
+  lifesteal.give:
+    description: 允许给予生命汲取附魔
+    default: op
