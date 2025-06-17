@@ -1,5 +1,6 @@
 package com.example.lifesteal;
 
+import com.example.lifesteal.commands.LifeStealCommand; // Add this line
 import com.example.lifesteal.enchantments.LifeStealEnchantment;
 import com.example.lifesteal.listeners.LifeStealListener;
 import org.bukkit.NamespacedKey;
